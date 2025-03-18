@@ -1,0 +1,19 @@
+function checkWallets() {
+  const input = document.getElementById("walletInput").value.trim();
+  const wallets = input.split("\n").map((wallet) => wallet.trim());
+  const resultDiv = document.getElementById("result");
+  resultDiv.innerHTML = ""; // Bersihkan hasil sebelumnya
+
+  console.log("Input Wallets:", wallets); // Debug: Tampilkan input pengguna
+  console.log("Allowlist:", allowlist); // Debug: Tampilkan data allowlist
+
+  wallets.forEach((wallet) => {
+    const isAllowed = allowlist.some((item) => item.wallet.trim() === wallet);
+    console.log(`Checking ${wallet}:`, isAllowed); // Debug: Tampilkan hasil pengecekan
+    const walletResult = document.createElement("div");
+    walletResult.classList.add("wallet-result");
+    walletResult.classList.add(isAllowed ? "valid" : "invalid");
+    walletResult.textContent = `${wallet} - ${isAllowed ? "Valid" : "Tidak Valid"}`;
+    resultDiv.appendChild(walletResult);
+  });
+}
